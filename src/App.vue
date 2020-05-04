@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <carousel :iHeight="'auto'" :iWidth="'100%'" :elId="1" :autoPlay="true">
+      <carousel-item>
+        <a href="https://www.baidu.com" class="carousel-item-box">
+          <img src="~assets/img/1.jpg" width="100%">
+        </a>
+      </carousel-item>
+      <carousel-item>
+        <a href=""  class="carousel-item-box">
+          <img src="~assets/img/2.jpg" width="100%">
+        </a>
+      </carousel-item>
+      <carousel-item>
+        <a href=""  class="carousel-item-box">
+          <img src="~assets/img/3.jpg" width="100%">
+        </a>
+      </carousel-item>
+      <carousel-item>
+        <a href=""  class="carousel-item-box">
+          <img src="~assets/img/4.jpg" width="100%">
+        </a>
+      </carousel-item>
+    </carousel>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import {Carousel, CarouselItem} from "components/carousel/index.js"
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'App',
+    components: {
+      Carousel,
+      CarouselItem
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import "~assets/css/reset.min.css";
+
+
 </style>
