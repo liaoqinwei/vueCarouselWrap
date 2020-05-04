@@ -13,25 +13,10 @@ beginIndex:开始从哪一张轮播                           0
 interval:自动轮播切换的间隔时间                        2000
 
 -->
-<carousel :iHeight="'auto'" :iWidth="'100%'" :elId="1" :autoPlay="true">
-  <carousel-item>
-    <a href="https://www.baidu.com" class="carousel-item-box">
-      <img src="~assets/img/1.jpg" width="100%">
-    </a>
-  </carousel-item>
-  <carousel-item>
-    <a href=""  class="carousel-item-box">
-      <img src="~assets/img/2.jpg" width="100%">
-    </a>
-  </carousel-item>
-  <carousel-item>
-    <a href=""  class="carousel-item-box">
-      <img src="~assets/img/3.jpg" width="100%">
-    </a>
-  </carousel-item>
-  <carousel-item>
-    <a href=""  class="carousel-item-box">
-      <img src="~assets/img/4.jpg" width="100%">
+<carousel :elId="1" v-if="this.banners" :autoPlay="true">
+  <carousel-item v-for="item in banners">
+    <a :href="item.link" class="carousel-item-box">
+      <img :src="item.image" :title="item.title" width="100%">
     </a>
   </carousel-item>
 </carousel>

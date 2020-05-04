@@ -23,6 +23,7 @@
         curIndex: this.beginIndex + 1,// 当前正在播放的索引
         sliding: false,//为了解决在自动滑动时可以滑动的问题
         isStart: false,//为了解决滑动重叠
+        waitTimer:null
       }
     },
     props: {
@@ -45,12 +46,16 @@
       },// 开始显示第几张
       moveRatio: {
         type: Number,
-        default: 0.3
+        default: 0.25
       },// 每次要移动的距离
       autoPlay: {
         type: Boolean,
         default: false
       },//是否自动轮播
+      autoPlayWaitTime:{
+        type:Number,
+        default:3000
+      }
     },
     // 组件装载完成后，我们把需要操作的元素都获取到
     mounted() {
@@ -152,8 +157,9 @@
         this.preL = parseFloat(utils.getCss(this.wrapper, 'left'))
         this.isStart = true
 
-        // 当用户手指滑动 清楚自动轮播
+        // 当用户手指滑动 清除自动轮播
         clearInterval(this.moveTimer)
+        clearTimeout(this.waitTimer)
       },
       wrapperTouchMove(ev) {
         ev.stopPropagation()
@@ -174,7 +180,8 @@
 
         let event = ev.changedTouches[0],
             diffX = event.pageX - this.pageX,
-            slideWidth = parseFloat(this.computedSlideWidth)
+            slideWidth = parseFloat(this.computedSlideWidth),
+            _this = this
 
         // 当滑动距离是slide的4/1时
         if (diffX >= slideWidth * this.moveRatio) {
@@ -189,7 +196,13 @@
             this.sliding = false
           })
         }
+        // 需要等待下一次touchStar才能触发
         this.isStart = false
+
+        // 滑动完成后继续自动轮播
+        this.waitTimer = setTimeout(function () {
+          _this.autoMove()
+        },this.autoPlayWaitTime)
       },
     }
   }
