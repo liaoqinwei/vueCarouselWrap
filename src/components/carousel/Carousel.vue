@@ -66,7 +66,7 @@
         default: true
       }// 是否需要焦点
     },
-    // 组件装载完成后，我们把需要操作的元素都获取到
+    // 组件装载完成后，执行初始化函数
     mounted() {
       this.carouselInit()
     },
@@ -107,6 +107,7 @@
         this.cloneSlide()
         this.autoPlay ? this.autoMove() : null
       },
+      // 设置slide宽度
       setSlideWidth() {
         if (!this.slides) return
         for (let slide of this.slides) {
@@ -252,6 +253,7 @@
   }
 
   .focus-item {
+    opacity: .9;
     flex: 1;
     margin: 0 3px;
     width: 8px;
@@ -261,6 +263,6 @@
   }
 
   .focus-item.active {
-    background: red;
+    background: lightcoral;
   }
 </style>
